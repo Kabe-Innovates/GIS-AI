@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GeoNex — AI-Powered Accident Insights for Tamil Nadu</title>
+  <meta name="description" content="Explore Tamil Nadu road accident data with AI-powered insights, heatmaps, density maps, and thematic visualizations." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+  <!-- Local AI Modal -->
+  <div id="api-key-modal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-icon">💻</div>
+      <h2>Welcome to GeoNex</h2>
+      <p>Connect to your local Ollama server and choose a model</p>
+      <input type="text" id="ollama-endpoint-input" placeholder="/api (default) or http://127.0.0.1:11434" autocomplete="off" />
+      <label for="api-model-select" class="modal-field-label">Model</label>
+      <select id="api-model-select" aria-label="Ollama model selection"></select>
+      <button id="api-key-submit" class="btn-primary">Start Local AI</button>
+      <p class="modal-hint">Make sure Ollama is running (`ollama serve`) and models are pulled.</p>
+    </div>
+  </div>
+
+  <!-- Main App -->
+  <div id="app">
+    <div id="map-container">
+      <div id="map"></div>
+      <!-- Map Controls Overlay -->
+      <div id="map-legend" class="map-overlay">
+        <div class="legend-title">Severity</div>
+        <div class="legend-item"><span class="legend-dot fatal"></span> Fatal</div>
+        <div class="legend-item"><span class="legend-dot major"></span> Major</div>
+        <div class="legend-item"><span class="legend-dot minor"></span> Minor</div>
+      </div>
+      <div id="map-stats" class="map-overlay map-stats">
+        <span id="stats-text">Loading...</span>
+      </div>
+    </div>
+
+    <div id="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-brand">
+          <span class="brand-icon">🧠</span>
+          <h1>GeoNex AI</h1>
+        </div>
+        <p class="sidebar-subtitle">Ask anything about Tamil Nadu accident data</p>
+        <p id="ai-model-status" class="sidebar-model-status">Model: not initialized</p>
+      </div>
+
+      <div class="quick-actions">
+        <button class="quick-btn" data-action="heatmap">🔥 Heatmap</button>
+        <button class="quick-btn" data-action="severity">⚠️ By Severity</button>
+        <button class="quick-btn" data-action="density">📊 Density</button>
+        <button class="quick-btn" data-action="reset">🗺️ Reset</button>
+      </div>
+
+      <div id="chat-messages" class="chat-messages">
+        <div class="message ai-message">
+          <div class="message-content">
+            <p>👋 Hello! I'm your GeoNex AI assistant. I can help you explore <strong>501 road accident records</strong> across Tamil Nadu.</p>
+            <p>Try asking me things like:</p>
+            <ul>
+              <li>"Which district has the most fatal accidents?"</li>
+              <li>"Show me a heatmap of all accidents"</li>
+              <li>"What are the top causes of accidents?"</li>
+              <li>"Show accidents by vehicle type"</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="chat-input-area">
+        <div class="input-wrapper">
+          <input type="text" id="chat-input" placeholder="Ask about accidents, request maps..." autocomplete="off" />
+          <button id="send-btn" class="send-btn" title="Send">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
