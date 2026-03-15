@@ -2,7 +2,7 @@ import './styles/index.css';
 import { setAccidents, parseFullCSV, summarize } from './data/accidents.js';
 import { initMap, showAllMarkers } from './map/map.js';
 import { initAI, getActiveModel, getActiveEndpoint, getSupportedModels } from './ai/engine.js';
-import { initSidebar, addMessage } from './ui/sidebar.js';
+import { initSidebar } from './ui/sidebar.js';
 
 // CSV data embedded inline (501 records)
 const CSV_URL = '/data/tn_accidents_500.csv';
@@ -86,17 +86,9 @@ function setupLocalAIModal() {
             updateModelStatus('connected');
             modal.classList.add('hidden');
 
-            if (showErrors) {
-                addMessage(`Local AI connected using \`${getActiveModel()}\`.`, 'ai');
-            }
-
             return true;
         } catch (e) {
             updateModelStatus('unavailable');
-
-            if (showErrors) {
-                addMessage(`❌ ${e.message}`, 'ai');
-            }
 
             return false;
         }

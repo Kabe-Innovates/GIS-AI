@@ -77,9 +77,11 @@ function parseCSV(csvString) {
 // We'll load the full CSV dynamically in main.js via fetch
 // For now, parse what we have as fallback
 let _accidents = null;
+let _summaryCache = null;
 
 export function setAccidents(data) {
     _accidents = data;
+    _summaryCache = null;
 }
 
 export function getAccidents() {
@@ -106,6 +108,10 @@ export function getUniqueValues(field) {
 }
 
 export function summarize() {
+    if (_summaryCache) {
+        return _summaryCache;
+    }
+
     const data = getAccidents();
     const totalAccidents = data.length;
     const totalFatalities = data.reduce((s, a) => s + a.fatals, 0);
@@ -136,7 +142,7 @@ export function summarize() {
         fatalByDistrict[a.district] = (fatalByDistrict[a.district] || 0) + 1;
     });
 
-    return {
+    _summaryCache = {
         totalAccidents,
         totalFatalities,
         totalInjuries,
@@ -153,6 +159,8 @@ export function summarize() {
         causes: Object.keys(byCause).sort(),
         vehicleTypes: Object.keys(byVehicle).sort(),
     };
+
+    return _summaryCache;
 }
 
 export function parseFullCSV(csvText) {

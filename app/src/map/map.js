@@ -201,11 +201,12 @@ export function generateDensityMap(field = 'district') {
         const label = L.divIcon({
             className: 'density-label',
             html: `<div style="
-        color: white;
+                color: #f8ece4;
         font-size: 11px;
         font-weight: 600;
-        font-family: Inter, sans-serif;
+                font-family: Space Grotesk, sans-serif;
         text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+                letter-spacing: 0.02em;
         text-align: center;
         white-space: nowrap;
       ">${key}<br/><span style="font-size:13px">${count}</span></div>`,
@@ -311,17 +312,17 @@ function updateLegend(type, field = '') {
     if (type === 'heatmap') {
         legendEl.innerHTML = `
       <div class="legend-title">Heatmap Intensity</div>
-      <div class="legend-item"><span class="legend-dot" style="background:#ef4444;box-shadow:0 0 6px #ef4444"></span> High</div>
-      <div class="legend-item"><span class="legend-dot" style="background:#f59e0b;box-shadow:0 0 6px #f59e0b"></span> Medium</div>
-      <div class="legend-item"><span class="legend-dot" style="background:#2563eb;box-shadow:0 0 6px #2563eb"></span> Low</div>
+            <div class="legend-item"><span class="legend-dot" style="background:#d9554a;box-shadow:0 0 6px #d9554a"></span> High</div>
+            <div class="legend-item"><span class="legend-dot" style="background:#ddb16f;box-shadow:0 0 6px #ddb16f"></span> Medium</div>
+            <div class="legend-item"><span class="legend-dot" style="background:#f8ece4;box-shadow:0 0 6px #f8ece4"></span> Low</div>
     `;
     } else if (type === 'density') {
         legendEl.innerHTML = `
       <div class="legend-title">Density</div>
-      <div class="legend-item"><span class="legend-dot" style="background:#ef4444;box-shadow:0 0 6px #ef4444"></span> High (>75%)</div>
-      <div class="legend-item"><span class="legend-dot" style="background:#f59e0b;box-shadow:0 0 6px #f59e0b"></span> Medium (50-75%)</div>
-      <div class="legend-item"><span class="legend-dot" style="background:#3b82f6;box-shadow:0 0 6px #3b82f6"></span> Low (25-50%)</div>
-      <div class="legend-item"><span class="legend-dot" style="background:#10b981;box-shadow:0 0 6px #10b981"></span> Minimal (<25%)</div>
+            <div class="legend-item"><span class="legend-dot" style="background:#d9554a;box-shadow:0 0 6px #d9554a"></span> High (>75%)</div>
+            <div class="legend-item"><span class="legend-dot" style="background:#ddb16f;box-shadow:0 0 6px #ddb16f"></span> Medium (50-75%)</div>
+            <div class="legend-item"><span class="legend-dot" style="background:#f8ece4;box-shadow:0 0 6px #f8ece4"></span> Low (25-50%)</div>
+            <div class="legend-item"><span class="legend-dot" style="background:#96b387;box-shadow:0 0 6px #96b387"></span> Minimal (<25%)</div>
     `;
     } else if (type === 'thematic') {
         const colorMap = field === 'cause' ? CAUSE_COLORS : field === 'vehicles' ? VEHICLE_COLORS : SEVERITY_COLORS;
