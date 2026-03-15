@@ -1,0 +1,3 @@
+geoserver/.env
+geoserver/data_dir/
+geoserver/logs/

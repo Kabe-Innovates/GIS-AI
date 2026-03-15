@@ -1,0 +1,16 @@
+services:
+  geoserver:
+    image: kartoza/geoserver:2.27.2
+    container_name: geonex-geoserver
+    restart: unless-stopped
+    ports:
+      - "${GEOSERVER_PORT:-8080}:8080"
+    environment:
+      GEOSERVER_ADMIN_USER: "${GEOSERVER_ADMIN_USER:-admin}"
+      GEOSERVER_ADMIN_PASSWORD: "${GEOSERVER_ADMIN_PASSWORD:-geoserver}"
+      INITIAL_MEMORY: "${INITIAL_MEMORY:-512M}"
+      MAXIMUM_MEMORY: "${MAXIMUM_MEMORY:-2G}"
+    volumes:
+      - ./data_dir:/opt/geoserver/data_dir
+      - ./logs:/opt/geoserver/logs
+      - ../Data Samples:/mnt/data-samples:ro
